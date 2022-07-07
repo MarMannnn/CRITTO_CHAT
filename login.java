@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.mavenproject1;
+package com.mycompany.testmex;
 import java.sql.*;
 /**
  *
@@ -16,6 +16,8 @@ public class login extends javax.swing.JFrame {
     public login() {
         initComponents();
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,12 +28,15 @@ public class login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPasswordField1 = new javax.swing.JPasswordField();
         nome = new javax.swing.JTextField();
         psw = new javax.swing.JTextField();
         login = new javax.swing.JButton();
         getsignup = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+
+        jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,8 +115,8 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
         String uname = nome.getText();
         String pass = psw.getText();
-        
-        String query = "SELECT * FROM user WHERE `userName` =? AND `Password` =?";
+       
+        String query = "SELECT * FROM utenti WHERE `userName` =? AND `Password` =?";
         
         try {
             PreparedStatement ps = MyConnection.getConnection().prepareStatement(query);
@@ -124,13 +129,17 @@ public class login extends javax.swing.JFrame {
             if(rs.next())
             {
                
-             rubrica a = new rubrica();
+             rubrica a = new rubrica(uname);
+             a.setTitle("you are logged with " + uname);
              a.setVisible(true);
              this.setVisible(false);
                 
             }
             else{
-                   System.out.println("login fallito");
+                    
+                    loginfallito f = new loginfallito();
+                    f.setVisible(true);
+                    
                 }
             
         } catch (SQLException ex) {
@@ -148,6 +157,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JButton getsignup;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JButton login;
     private javax.swing.JTextField nome;
     private javax.swing.JTextField psw;
