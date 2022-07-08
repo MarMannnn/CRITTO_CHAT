@@ -4,6 +4,7 @@
  */
 package com.mycompany.testmex;
 import java.sql.*;
+import javax.swing.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,6 +48,30 @@ public class rubrica extends javax.swing.JFrame {
     return utenti;
     
     }
+    
+    public String[] lstMsg(){
+    String[] messaggi = new String[20];
+    
+    try{  
+            // create the mysql insert preparedstatement
+            String query = "SELECT testo,mittente FROM messaggi WHERE destinatario =?";
+            PreparedStatement ps = MyConnection.getConnection().prepareStatement(query); 
+            ps.setString(1,nomeUtente);
+            ResultSet rs=ps.executeQuery();
+            int i = 0;
+            while(rs.next()){
+            String nome = rs.getString("testo");
+            String mit = rs.getString("mittente");
+            messaggi[i] = mit+": "+nome;
+            i++;
+            
+            }
+            }
+        catch(Exception e){ System.out.println(e);} 
+    
+    return messaggi;
+    
+    }
         
               
           
@@ -61,9 +86,10 @@ public class rubrica extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        messaggio = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,14 +105,24 @@ public class rubrica extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        messaggio.setColumns(20);
-        messaggio.setRows(5);
-        jScrollPane2.setViewportView(messaggio);
-
-        jButton1.setText("invia");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("visualizza mesaggi ricevuti");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = lstMsg();
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(jList2);
+
+        jButton3.setText("refresh");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -95,25 +131,33 @@ public class rubrica extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(215, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addGap(78, 78, 78)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -121,36 +165,44 @@ public class rubrica extends javax.swing.JFrame {
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
             // TODO add your handling code here:
-          
+            
             if (evt.getClickCount() == 2) {
             int index = jList1.locationToIndex(evt.getPoint());
             if (index >= 0) {
             Object o = jList1.getModel().getElementAt(index);
             destinatario = o.toString();
-            System.out.println("Double-clicked on: " + o.toString());
-          }
+            chat c = new chat(nomeUtente,destinatario);
+            c.setVisible(true);
+            
+            }
         }
     }//GEN-LAST:event_jList1MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+
+        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        String[] strings = lstMsg();
+        public int getSize() { return strings.length; }
+        public String getElementAt(int i) { return strings[i]; }
+        });
+        
+        JScrollPane jScrollPane3 = new JScrollPane();
+        jScrollPane3.setViewportView(jList2);
+        
+        
+        
+        
+    
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        rubrica r = new rubrica(nomeUtente);
+        r.setVisible(true);
+        r.dispose();
        
-
-        try{  
-            // create the mysql insert preparedstatement
-            String query = "INSERT INTO messaggi (mittente,destinatario,testo)" + " VALUES (?,?,?)";
-            PreparedStatement ps = MyConnection.getConnection().prepareStatement(query);          
-
-            ps.setString (1, nomeUtente);
-            ps.setString (2, destinatario);
-            ps.setString  (3, messaggio.getText());
-          
-            // execute the preparedstatement
-            ps.execute();
-            
-            }
-        catch(Exception e){ System.out.println(e);} 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
 
                                        
 
@@ -160,10 +212,11 @@ public class rubrica extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea messaggio;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }

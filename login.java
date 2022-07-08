@@ -30,11 +30,11 @@ public class login extends javax.swing.JFrame {
 
         jPasswordField1 = new javax.swing.JPasswordField();
         nome = new javax.swing.JTextField();
-        psw = new javax.swing.JTextField();
         login = new javax.swing.JButton();
         getsignup = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        psw = new javax.swing.JPasswordField();
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -70,14 +70,13 @@ public class login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(125, 125, 125)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
                     .addComponent(getsignup)
                     .addComponent(login)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                        .addComponent(psw)))
+                    .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                    .addComponent(psw))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -89,9 +88,9 @@ public class login extends javax.swing.JFrame {
                 .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(14, 14, 14)
                 .addComponent(psw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addComponent(login)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(getsignup)
@@ -130,7 +129,7 @@ public class login extends javax.swing.JFrame {
             {
                
              rubrica a = new rubrica(uname);
-             a.setTitle("you are logged with " + uname);
+             a.setTitle("you are logged as " + uname);
              a.setVisible(true);
              this.setVisible(false);
                 
@@ -160,6 +159,6 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JButton login;
     private javax.swing.JTextField nome;
-    private javax.swing.JTextField psw;
+    private javax.swing.JPasswordField psw;
     // End of variables declaration//GEN-END:variables
 }
