@@ -25,9 +25,10 @@ public class chat extends javax.swing.JFrame {
     
     try{  
             // create the mysql insert preparedstatement
-            String query = "SELECT testo,mittente,destinatario FROM messaggi WHERE destinatario =? AND mittente =?" +
+            String query = "SELECT testo,mittente,destinatario,iD FROM messaggi WHERE destinatario =? AND mittente =?" +
                            "UNION\n" +
-                           "SELECT testo,mittente,destinatario FROM messaggi WHERE destinatario =? AND mittente =?";
+                           "SELECT testo,mittente,destinatario,iD FROM messaggi WHERE destinatario =? AND mittente =?" + "ORDER BY iD";
+            
             PreparedStatement ps = MyConnection.getConnection().prepareStatement(query); 
             ps.setString(1,destinatario);
             ps.setString(2,mittente);
@@ -40,7 +41,7 @@ public class chat extends javax.swing.JFrame {
             String mit = rs.getString("mittente");
             
             messaggi[i] = mit+": "+testomsg;
-            System.out.println(messaggi[i]);
+            
             i++;
             
             }
@@ -65,7 +66,7 @@ public class chat extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
 
-        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("invia");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +83,11 @@ public class chat extends javax.swing.JFrame {
             String[] strings = chat();
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jList1MouseMoved(evt);
+            }
         });
         jScrollPane3.setViewportView(jList1);
 
@@ -130,7 +136,25 @@ public class chat extends javax.swing.JFrame {
             
             }
         catch(Exception e){ System.out.println(e);} 
+        String[] msg = chat();
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+                String[] strings = msg;
+                public int getSize() { return strings.length; }
+                public String getElementAt(int i) { return strings[i]; }});
+        jList1.updateUI();
+        
+        messaggio.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jList1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseMoved
+        // TODO add your handling code here:
+        String[] msg = chat();
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+                String[] strings = msg;
+                public int getSize() { return strings.length; }
+                public String getElementAt(int i) { return strings[i]; }});
+        jList1.updateUI();
+    }//GEN-LAST:event_jList1MouseMoved
 
     /**
      * @param args the command line arguments

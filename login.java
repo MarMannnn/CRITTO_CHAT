@@ -108,6 +108,7 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
         signup p = new signup();
         p.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_getsignupActionPerformed
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed

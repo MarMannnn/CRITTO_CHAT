@@ -92,6 +92,11 @@ public class rubrica extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = lstUtn();
@@ -172,6 +177,7 @@ public class rubrica extends javax.swing.JFrame {
             Object o = jList1.getModel().getElementAt(index);
             destinatario = o.toString();
             chat c = new chat(nomeUtente,destinatario);
+            c.setTitle("chat with"+destinatario);
             c.setVisible(true);
             
             }
@@ -198,11 +204,29 @@ public class rubrica extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        rubrica r = new rubrica(nomeUtente);
-        r.setVisible(true);
-        r.dispose();
+        String[] msg = lstMsg();
+        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+                String[] strings = msg;
+                public int getSize() { return strings.length; }
+                public String getElementAt(int i) { return strings[i]; }});
+        jList2.updateUI();
+        
+        String[] utn = lstUtn();
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+                String[] strings = utn;
+                public int getSize() { return strings.length; }
+                public String getElementAt(int i) { return strings[i]; }});
+        jList1.updateUI();
        
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        // TODO add your handling code here:
+
+        
+        
+
+    }//GEN-LAST:event_formMouseMoved
 
                                        
 
