@@ -52,7 +52,7 @@ public class signup extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("inserisci il nome");
+        jLabel2.setText("inserisci il nome utente");
 
         jLabel3.setText("inserisci la password");
 

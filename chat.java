@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.testmex;
+import java.math.BigDecimal;
 import java.sql.*;
 /**
  *
@@ -40,7 +41,8 @@ public class chat extends javax.swing.JFrame {
             String testomsg = rs.getString("testo");
             String mit = rs.getString("mittente");
             
-            messaggi[i] = mit+": "+testomsg;
+            //messaggi[i] = mit+": "+testomsg;
+            messaggi[i] = testomsg;
             
             i++;
             
@@ -68,7 +70,9 @@ public class chat extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("invia");
+        jButton1.setBackground(new java.awt.Color(242, 242, 242));
+        jButton1.setIcon(new javax.swing.ImageIcon("/home/marman/NetBeansProjects/testMex/src/main/java/com/mycompany/testmex/icon/send_message.png")); // NOI18N
+        jButton1.setBorderPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -89,6 +93,11 @@ public class chat extends javax.swing.JFrame {
                 jList1MouseMoved(evt);
             }
         });
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jList1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -101,7 +110,7 @@ public class chat extends javax.swing.JFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -111,15 +120,15 @@ public class chat extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(26, 26, 26))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    RSANumerico rsa = new RSANumerico();
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{  
@@ -129,7 +138,7 @@ public class chat extends javax.swing.JFrame {
 
             ps.setString (1, mittente);
             ps.setString (2, destinatario);
-            ps.setString  (3, messaggio.getText());
+            ps.setString (3,rsa.cifratura(messaggio.getText()));
           
             // execute the preparedstatement
             ps.execute();
@@ -155,6 +164,18 @@ public class chat extends javax.swing.JFrame {
                 public String getElementAt(int i) { return strings[i]; }});
         jList1.updateUI();
     }//GEN-LAST:event_jList1MouseMoved
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            int index = jList1.locationToIndex(evt.getPoint());
+            if (index >= 0) {
+            Object o = jList1.getModel().getElementAt(index);
+            String msg = o.toString();
+            msgDecifrato m = new msgDecifrato(msg);
+            
+            m.setVisible(true);}}
+    }//GEN-LAST:event_jList1MouseClicked
 
     /**
      * @param args the command line arguments
