@@ -226,7 +226,9 @@ public class rubrica extends javax.swing.JFrame {
             int index = jList2.locationToIndex(evt.getPoint());
             if (index >= 0) {
             Object o = jList2.getModel().getElementAt(index);
-            String msg = o.toString();
+            String msgInt = o.toString();
+            String[] l = msgInt.split(" ");
+            String msg = l[1];
             msgDecifrato m = new msgDecifrato(msg);
             
             m.setVisible(true);}}

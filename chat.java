@@ -41,8 +41,8 @@ public class chat extends javax.swing.JFrame {
             String testomsg = rs.getString("testo");
             String mit = rs.getString("mittente");
             
-            //messaggi[i] = mit+": "+testomsg;
-            messaggi[i] = testomsg;
+            messaggi[i] = mit+": "+testomsg;
+            //messaggi[i] = testomsg;
             
             i++;
             
@@ -68,7 +68,7 @@ public class chat extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        
 
         jButton1.setBackground(new java.awt.Color(242, 242, 242));
         jButton1.setIcon(new javax.swing.ImageIcon("/home/marman/NetBeansProjects/testMex/src/main/java/com/mycompany/testmex/icon/send_message.png")); // NOI18N
@@ -128,9 +128,32 @@ public class chat extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    RSANumerico rsa = new RSANumerico();
+    public String getE()
+    {   
+        String s = new String();
+        try{  
+            // create the mysql insert preparedstatement
+            String query = "SELECT pubblica FROM utenti WHERE userName =?";
+                           
+            
+            PreparedStatement ps = MyConnection.getConnection().prepareStatement(query); 
+            ps.setString(1,destinatario);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+            s = rs.getString("pubblica");
+            }
+        }
+            
+        catch(Exception e){ System.out.println(e);} 
+    
+    return s;
+    }
+    
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        RSANumerico rsa = new RSANumerico(getE());
         try{  
             // create the mysql insert preparedstatement
             String query = "INSERT INTO messaggi (mittente,destinatario,testo)" + " VALUES (?,?,?)";
@@ -171,7 +194,10 @@ public class chat extends javax.swing.JFrame {
             int index = jList1.locationToIndex(evt.getPoint());
             if (index >= 0) {
             Object o = jList1.getModel().getElementAt(index);
-            String msg = o.toString();
+            String msgInt = o.toString();
+            String[] l = msgInt.split(" ");
+            String msg = l[1];
+            
             msgDecifrato m = new msgDecifrato(msg);
             
             m.setVisible(true);}}
