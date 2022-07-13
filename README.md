@@ -31,4 +31,8 @@ Questa sezione permette di decifrare i messaggi ricevuti andando ad inserie la p
 
 
 ## DATABASE
-Per lo store dei dati utenti e messaggi viene usato un database SQL con due tabelle (utenti e messaggi). Sul DB verranno inoltre eseguite le query per il recupero dei dati richiesti (esempio chiave pubblica, messaggi ricevuti ecc)
+Per lo store dei dati utenti e messaggi viene usato un database SQL con due tabelle (utenti e messaggi). Sul DB verranno inoltre eseguite le query per il recupero dei dati richiesti (esempio chiave pubblica, messaggi ricevuti ecc).
+
+![dfg](https://user-images.githubusercontent.com/100956253/178734636-8674eb33-76cb-4491-8625-934350af1003.jpg)
+![fdsd](https://user-images.githubusercontent.com/100956253/178734686-d6192293-d924-4395-8768-2559511aed0e.jpg)
+
