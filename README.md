@@ -29,3 +29,6 @@ Si andrà quindi ad aprire la chat vera e propria dove il mittente inserirà il 
 Questa sezione permette di decifrare i messaggi ricevuti andando ad inserie la propria chiave privata, fornita al momento della registrazione
 ![Screenshot from 2022-07-13 13-17-06](https://user-images.githubusercontent.com/100956253/178727963-d945a01f-60ed-4a4e-ba16-e368a196b027.png)
 
+
+## DATABASE
+Per lo store dei dati utenti e messaggi viene usato un database SQL con due tabelle (utenti e messaggi). Sul DB verranno inoltre eseguite le query per il recupero dei dati richiesti (esempio chiave pubblica, messaggi ricevuti ecc)
