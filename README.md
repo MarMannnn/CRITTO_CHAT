@@ -7,6 +7,7 @@ I messaggi verranno visualizzati nelle apposite sezioni in maniera cifrata e si 
 
 ### 1-LOGIN/SIGN UP
 Un utente non registrato può registarsi andando ad inserire un UserName univoco. In automatico riceverai una **chiave privata** da non perdere e mantenere segreta, questa sarà necessaria per decifrare i messaggi che si riceveranno.
+
 ![Screenshot from 2022-07-13 13-18-28](https://user-images.githubusercontent.com/100956253/178722404-5e571255-f623-4854-a618-ac9371e6bdc8.png)
 
 Procedere con la fase di login in modo da accedere al proprio profilo
@@ -17,6 +18,7 @@ Procedere con la fase di login in modo da accedere al proprio profilo
 ### **2-RUBRICA** 
 Una volta eseguito l'accesso comparirà una sorta di "rubrica" nella quale avremo la lista degli utenti registrati. Inoltre vi è una sezione dove è possibile vedere tutti i messaggi ricevuti. Con un doppio clic sul messaggio si può andare a decifrarlo semplicemente inserendo la propria chiave privata.
 Facendo doppio clic sull'utente di interesse si potrà iniziare a "chattare" con questo.
+
 ![Screenshot from 2022-07-13 13-19-10](https://user-images.githubusercontent.com/100956253/178727900-89755a06-578f-419e-95d1-009cf4d8b013.png)
 
 
@@ -27,6 +29,7 @@ Si andrà quindi ad aprire la chat vera e propria dove il mittente inserirà il 
 
 ### **4-DECIFRATORE**
 Questa sezione permette di decifrare i messaggi ricevuti andando ad inserie la propria chiave privata, fornita al momento della registrazione
+
 ![Screenshot from 2022-07-13 13-17-06](https://user-images.githubusercontent.com/100956253/178727963-d945a01f-60ed-4a4e-ba16-e368a196b027.png)
 
 
