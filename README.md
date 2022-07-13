@@ -21,8 +21,15 @@ Procedere con la fase di login in modo da accedere al proprio profilo
 Una volta eseguito l'accesso comparirà una sorta di "rubrica" nella quale avremo la lista degli utenti registrati. Inoltre vi è una sezione dove è possibile vedere tutti i messaggi ricevuti. Con un doppio clic sul messaggio si può andare a decifrarlo semplicemente inserendo la propria chiave privata.
 Facendo doppio clic sull'utente di interesse si potrà iniziare a "chattare" con questo.
 
-![Screenshot from 2022-07-13 13-17-53](https://user-images.githubusercontent.com/100956253/178727145-6d181721-fd7c-4b26-9f12-39ad9f5b7a1f.png)
+
+![Screenshot from 2022-07-13 13-19-10](https://user-images.githubusercontent.com/100956253/178727900-89755a06-578f-419e-95d1-009cf4d8b013.png)
+
 
 ### **3-CHAT**
 
+![Screenshot from 2022-07-13 13-17-53](https://user-images.githubusercontent.com/100956253/178727145-6d181721-fd7c-4b26-9f12-39ad9f5b7a1f.png)
+
 ### **4-DECIFRATORE**
+
+![Screenshot from 2022-07-13 13-17-06](https://user-images.githubusercontent.com/100956253/178727963-d945a01f-60ed-4a4e-ba16-e368a196b027.png)
+
